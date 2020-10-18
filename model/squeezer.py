@@ -8,4 +8,5 @@ class Squeezer:
         self.productivity_in_litres_per_hour = productivity_in_litres_per_hour
 
     def __repr__(self):
-        return f"color: {self.color}, power: {self.power_consumption_in_kilowatts}, prod: {self.productivity_in_litres_per_hour}"
+        return f"color: {self.color}, power: {self.power_consumption_in_kilowatts}, " \
+               f"prod: {self.productivity_in_litres_per_hour}"

@@ -6,7 +6,7 @@ class MergeSort:
 
     @staticmethod
     def sort_ascending(array, key=lambda obj: obj):
-        start_time = time.time()
+        # start_time = time.time()
 
         if len(array) == 1:
             return
@@ -45,9 +45,6 @@ class MergeSort:
             final_array_index += 1
             right_subarray_index += 1
 
-        end_time = time.time()
-
         return f'Merge sort\n' \
-               f'time: {end_time - start_time}\n' \
                f'number of comparisons: {MergeSort.number_of_comparisons}\n' \
                f'sorted array: {array}'

@@ -1,47 +1,91 @@
-arr_of_tuples = [(0, 1), (2, 3), (4, 7), (10, 11), (7, 10)]
-# arr_of_tuples = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
+"""
+first training input
+
+expected output: [(0, 1), (3, 8), (9,12 )]
+"""
+input_array = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
+
+"""
+second training input (my own)
+
+expected output: [(0, 1), (2, 3), (4,11)]
+"""
+# input_array = [(0, 1), (2, 3), (4, 7), (10, 11), (7, 10)]
 
 
+def merge_sort(array):
+    """
+    returns sorted array
+    """
 
-for i in range(len(arr_of_tuples)):
-    arr_of_tuples[i] = list(arr_of_tuples[i])
+    if len(array) == 1:
+        return
 
+    middle_index = len(array) // 2
 
-def bubble_sort(arr):
-    for iteration in range(len(arr) -1):
-        for current_index in range(len(arr) - iteration - 1):
-            if arr[current_index] > arr[current_index + 1]:
-                arr[current_index], arr[current_index + 1] = arr[current_index + 1], arr[current_index]
-    
-    return arr
+    left_subarray = array[:middle_index]
+    right_subarray = array[middle_index:]
 
+    merge_sort(left_subarray)
+    merge_sort(right_subarray)
 
-def sollution(arr):
-    arr_sollution = []
-    i = 0
-    while i < len(arr) - 1:
-        
-        if arr[i][1] == arr[i+1][0]:
-            first_el = arr[i][0]
-            while i < len(arr)-1 and arr[i][1] == arr[i+1][0]:
-                i += 1
-            last_el = arr[i][1]
-            arr_sollution.append((first_el, last_el))
-            i+=1
+    left_subarray_index, right_subarray_index, final_array_index = 0, 0, 0
 
-        elif arr[i][1] > arr[i+1][0]:
-            arr_sollution.append((arr[i][0], arr[i+1][1]))
-            i += 1
+    while left_subarray_index < len(left_subarray) and right_subarray_index < len(right_subarray):
+        if left_subarray[left_subarray_index] < right_subarray[right_subarray_index]:
+            array[final_array_index] = left_subarray[left_subarray_index]
+            left_subarray_index += 1
 
         else:
-            arr_sollution.append(tuple(arr[i]))
+            array[final_array_index] = right_subarray[right_subarray_index]
+            right_subarray_index += 1
 
-        i += 1
-        
-    return arr_sollution
+        final_array_index += 1
+
+    while left_subarray_index < len(left_subarray):
+        array[final_array_index] = left_subarray[left_subarray_index]
+        final_array_index += 1
+        left_subarray_index += 1
+
+    while right_subarray_index < len(right_subarray):
+        array[final_array_index] = right_subarray[right_subarray_index]
+        final_array_index += 1
+        right_subarray_index += 1
+
+    return array
 
 
-print(arr_of_tuples)
-print(bubble_sort(arr_of_tuples))
-sorted_arr = bubble_sort(arr_of_tuples)
-print(sollution(sorted_arr))
+def solution(array):
+    """
+    best - O(N)
+    worst - O(N^2)
+
+    returns output_array which is a solution to given task
+    """
+    output_array = []
+    index = 0
+    while index < len(array) - 1:
+
+        if array[index][1] == array[index + 1][0]:
+            first_el = array[index][0]
+            while index < len(array) - 1 and array[index][1] == array[index + 1][0]:
+                index += 1
+            second_el = array[index][1]
+            output_array.append((first_el, second_el))
+            index += 1
+
+        elif array[index][1] > array[index + 1][0]:
+            output_array.append((array[index][0], array[index + 1][1]))
+            index += 1
+
+        else:
+            output_array.append(tuple(array[index]))
+
+        index += 1
+
+    return output_array
+
+
+print(input_array)
+sorted_array = merge_sort(input_array)
+print(solution(sorted_array))

@@ -1,21 +1,24 @@
 """
 first training input
-
-expected output: [(0, 1), (3, 8), (9,12 )]
 """
-input_array = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
+input_array1 = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
 
 """
 second training input (my own)
-
-expected output: [(0, 1), (2, 3), (4,11)]
 """
-# input_array = [(0, 1), (2, 3), (4, 7), (10, 11), (7, 10)]
+input_array2 = [(0, 1), (4, 7), (2, 3), (10, 11), (7, 10)]
 
 
 def merge_sort(array):
     """
     returns sorted array
+
+
+    >>> merge_sort(input_array1)
+    [(0, 1), (3, 5), (4, 8), (9, 10), (10, 12)]
+
+    >>> merge_sort(input_array2)
+    [(0, 1), (2, 3), (4, 7), (7, 10), (10, 11)]
     """
 
     if len(array) == 1:
@@ -57,10 +60,17 @@ def merge_sort(array):
 
 def solution(array):
     """
+    returns output_array which is a solution to given task
+
     best - O(N)
     worst - O(N^2)
 
-    returns output_array which is a solution to given task
+
+    >>> solution(merge_sort(input_array1))
+    [(0, 1), (3, 8), (9, 12)]
+
+    >>> solution(merge_sort(input_array2))
+    [(0, 1), (2, 3), (4, 11)]
     """
     output_array = []
     index = 0
@@ -84,8 +94,3 @@ def solution(array):
         index += 1
 
     return output_array
-
-
-print(input_array)
-sorted_array = merge_sort(input_array)
-print(solution(sorted_array))

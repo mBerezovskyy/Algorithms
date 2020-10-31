@@ -94,3 +94,8 @@ def solution(array):
         index += 1
 
     return output_array
+
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
